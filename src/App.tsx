@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Main from '../Main/main.tsx';
-import Navbar from '../componets/navbar.tsx';
+import Main from '../Main/main.js';
+import Navbar from '../componets/navbar.js';
 
 function App() {
   return (
