@@ -1,7 +1,4 @@
-
 nav {
-  
-  
   padding: 1rem 2rem;
   position: sticky;
   top: 0;
@@ -10,14 +7,21 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 35px;
-  
+  height: 60px;
+  background: rgba(26, 26, 26, 0.95);
+  backdrop-filter: blur(10px);
+  width: 100%;
+  box-sizing: border-box;
+}
 
+/* Logo */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 nav img {
-  margin-right: 2rem;
-  margin-left: 0;
   display: inline-block;
   width: 44px;
   height: 44px;
@@ -25,39 +29,52 @@ nav img {
   object-fit: cover;
   border: 2px solid #00ffe7;
   box-shadow: 0 2px 8px rgba(0,255,231,0.15);
-transition: box-shadow 0.4s, border-color 0.4s;
+  transition: box-shadow 0.4s, border-color 0.4s;
 }
 
-@keyframes navbarFadeIn {
-  from { opacity: 0; transform: translateY(-30px);}
-  to { opacity: 1; transform: translateY(0);}
+/* Hamburger */
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 101;
 }
 
+.mobile-menu-toggle span {
+  width: 25px;
+  height: 3px;
+  background: #fff;
+  margin: 3px 0;
+  transition: 0.3s;
+  border-radius: 2px;
+}
+
+/* Nav Links */
 nav ul {
   list-style: none;
   display: flex;
   gap: 2rem;
-  margin-left: 15rem;
+  margin: 0;
   padding: 0;
-  
-  
 }
 
 nav ul li a {
   color: #fff;
   text-decoration: none;
-  font-size: 1.15rem;
+  font-size: clamp(1rem, 1vw + 0.8rem, 1.15rem);
   padding: 0.5rem 1.2rem;
- 
   background: linear-gradient(90deg, #232526 0%, #414345 100%);
   transition: 
     background 0.4s cubic-bezier(.4,2,.6,1),
     color 0.3s,
-    transform 0.25s cubic-bezier(.4,2,.6,1),
-    position: relative;
+    transform 0.25s cubic-bezier(.4,2,.6,1);
+  position: relative;
   overflow: hidden;
+  border-radius: 0.5rem;
 }
-
 
 nav ul li a span {
   position: relative;
@@ -66,33 +83,146 @@ nav ul li a span {
 }
 
 .ff {
-    margin-top: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: 1;
-  border-radius: 2rem;
-  background: rgba(19, 45, 218, 0.08); /* subtle light red background */
-  box-shadow: 0 0 24px 6px rgba(79, 214, 151, 0.25), 
-              0 0 0 4px rgba(16, 143, 126, 0.1) inset;
-  padding: 1rem 2.5rem;
-   /* Remove margin so it doesn't overflow */
-  transition: box-shadow 0.4s;
-  width: auto; /* Only as wide as its content */
-  max-width: 31%;
- margin-right: 32rem;
+  position: absolute;
 }
 
-.ff:hover {
-  box-shadow: 0 0 40px 12px rgba(255, 80, 80, 0.35), 
-              0 0 0 8px rgba(255, 80, 80, 0.15) inset;
+/* Tablet Styles */
+@media (max-width: 1024px) {
+  nav {
+    padding: 1rem 1.5rem;
+    height: 55px;
+  }
+
+  nav ul {
+    gap: 1rem; /* smaller gap */
+  }
+  
+  nav ul li a {
+    font-size: 1rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  nav img {
+    width: 40px;
+    height: 40px;
+  }
 }
 
+/* Mobile Styles */
+@media (max-width: 768px) {
+  nav {
+    padding: 1rem;
+    height: 70px;
+    position: relative;
+  }
 
-nav img:hover {
-  box-shadow:
-    0 0 40px 12px rgba(255, 80, 80, 0.45),
-    0 0 80px 24px rgba(255, 80, 80, 0.25),
-    0 2px 8px rgba(0,255,231,0.15);
-  border-color: #ff5050;
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  .ff {
+    position: fixed;
+    top: 70px;
+    left: -100%;
+    width: 100%;
+    height: calc(100vh - 70px);
+    background: rgba(26, 26, 26, 0.98);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 2rem 1rem;
+    transition: left 0.3s ease;
+    z-index: 99;
+    margin: 0;
+  }
+
+  .ff.mobile-open {
+    left: 0;
+  }
+
+  .ff ul {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    align-items: center;
+    margin-top: 2rem;
+  }
+
+  .ff ul li {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .ff ul li a {
+    display: block;
+    text-align: center;
+    font-size: 1.1rem;
+    padding: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    background: rgba(19, 45, 218, 0.15);
+    border-radius: 1rem;
+    border: 1px solid rgba(79, 214, 151, 0.2);
+  }
+
+  .ff ul li a:hover {
+    background: rgba(255, 80, 80, 0.2);
+    border-color: rgba(255, 80, 80, 0.4);
+    transform: scale(1.02);
+  }
+
+  nav img {
+    width: 36px;
+    height: 36px;
+  }
+
+  /* Hamburger animation when menu is open */
+  .mobile-open .mobile-menu-toggle span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+
+  .mobile-open .mobile-menu-toggle span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-open .mobile-menu-toggle span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+}
+
+/* Small Mobile Styles */
+@media (max-width: 480px) {
+  nav {
+    padding: 0.8rem;
+    height: 65px;
+  }
+
+  .ff {
+    padding: 1.5rem 0.8rem;
+    top: 65px;
+    height: calc(100vh - 65px);
+  }
+
+  .ff ul li a {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+
+  nav img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .mobile-menu-toggle span {
+    width: 22px;
+  }
+}
+
+/* Fade-in Animation */
+@keyframes navbarFadeIn {
+  from { opacity: 0; transform: translateY(-30px);}
+  to { opacity: 1; transform: translateY(0);}
 }
